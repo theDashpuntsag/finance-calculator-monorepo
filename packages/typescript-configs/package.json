@@ -1,0 +1,8 @@
+{
+  "name": "@finance-calculator/typescript-configs",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^4.5.0"
+  }
+}
