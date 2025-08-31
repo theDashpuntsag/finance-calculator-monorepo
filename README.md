@@ -1,19 +1,22 @@
 # Finance Calculator Monorepo
 
-A Turborepo monorepo setup with pnpm containing a React Vite frontend and Express backend for a finance calculator application.
+A Turborepo monorepo setup with pnpm containing multiple React frontends and Express backend microservices for a comprehensive finance calculator application.
 
 ## Structure
 
 ```plaintext
 finance-calculator-monorepo/
-├── apps/
-│   ├── frontend/          # React Vite application
-│   └── backend/           # Express.js API server
+├── frontend/
+│   ├── echarts-app/       # React Vite app with ECharts
+│   └── recharts-app/      # React Vite app with ReCharts
+├── backend/
+│   ├── auth/             # Authentication service
+│   └── calculation/      # Financial calculation service
 ├── packages/
-│   └── ui/               # Shared UI components
-├── package.json          # Root package.json with workspace scripts
-├── pnpm-workspace.yaml   # pnpm workspace configuration
-└── turbo.json           # Turborepo configuration
+│   └── ui/              # Shared UI components
+├── package.json         # Root package.json with workspace scripts
+├── pnpm-workspace.yaml  # pnpm workspace configuration
+└── turbo.json          # Turborepo configuration
 ```
 
 ## Prerequisites
@@ -39,8 +42,10 @@ pnpm dev
 
 This will start:
 
-- Frontend: `http://localhost:3000` (React Vite app)
-- Backend: `http://localhost:3001` (Express API)
+- **ECharts Frontend**: `http://localhost:3000` (React app with ECharts)
+- **ReCharts Frontend**: `http://localhost:3002` (React app with ReCharts)
+- **Auth Service**: `http://localhost:3001` (Authentication API)
+- **Calculation Service**: `http://localhost:3003` (Financial calculations API)
 
 ### Build
 
@@ -66,18 +71,39 @@ pnpm test
 pnpm clean
 ```
 
-## Apps
+## Apps & Services
 
-### Frontend (`apps/frontend`)
+### Frontend Applications
+
+#### ECharts App (`frontend/echarts-app`)
 
 - React 18 with TypeScript
 - Vite for fast development and building
-- ESLint for code quality
+- ECharts for advanced data visualization
+- Port: 3000
 
-### Backend (`apps/backend`)
+#### ReCharts App (`frontend/recharts-app`)
+
+- React 18 with TypeScript
+- Vite for fast development and building
+- ReCharts for interactive financial charts
+- Port: 3002
+
+### Backend Services
+
+#### Auth Service (`backend/auth`)
 
 - Express.js with TypeScript
+- Authentication and authorization
 - CORS and Helmet for security
+- Port: 3001
+
+#### Calculation Service (`backend/calculation`)
+
+- Express.js with TypeScript
+- Financial calculation APIs (compound interest, simple interest, loan payments, etc.)
+- CORS and Helmet for security
+- Port: 3003
 - Sample finance calculation endpoints
 
 ### UI Package (`packages/ui`)
@@ -116,4 +142,19 @@ pnpm add -D <package>
 - All packages share the same `node_modules` through pnpm workspaces
 - Turborepo caches build outputs for faster subsequent builds
 - TypeScript is configured across all packages with consistent settings
-- ESLint is set up for each package with appropriate configurations
+- ESLint 9.x with flat config is set up for each package with appropriate configurations
+- Prettier is configured for consistent code formatting
+
+## Git Hooks (Husky)
+
+This repository uses [Husky](https://typicode.github.io/husky/) for git hooks:
+
+- **Pre-commit**: Runs `lint-staged` to check code quality before commits
+- **Lint-staged**: Automatically runs ESLint and Prettier on staged files
+
+### What runs on pre-commit:
+
+- ESLint with auto-fix on TypeScript/JavaScript files
+- Prettier formatting on JSON, Markdown, and YAML files
+
+The hooks ensure code quality and consistency across the entire monorepo.

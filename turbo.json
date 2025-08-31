@@ -5,6 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
     },
+    "format": {
+      "dependsOn": ["^format"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },

@@ -12,10 +12,10 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'Finance Calculator API',
     version: '1.0.0',
-    status: 'healthy'
+    status: 'healthy',
   });
 });
 
@@ -26,23 +26,23 @@ app.get('/api/health', (req, res) => {
 // Sample finance calculation endpoint
 app.post('/api/calculate/compound-interest', (req, res) => {
   const { principal, rate, time, compounding } = req.body;
-  
+
   if (!principal || !rate || !time || !compounding) {
-    return res.status(400).json({ 
-      error: 'Missing required fields: principal, rate, time, compounding' 
+    return res.status(400).json({
+      error: 'Missing required fields: principal, rate, time, compounding',
     });
   }
-  
-  const amount = principal * Math.pow((1 + rate / compounding), compounding * time);
+
+  const amount = principal * Math.pow(1 + rate / compounding, compounding * time);
   const interest = amount - principal;
-  
+
   res.json({
     principal,
     rate,
     time,
     compounding,
     finalAmount: Math.round(amount * 100) / 100,
-    interestEarned: Math.round(interest * 100) / 100
+    interestEarned: Math.round(interest * 100) / 100,
   });
 });
 
