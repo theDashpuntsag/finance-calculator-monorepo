@@ -17,6 +17,8 @@
     "recharts": "^2.12.7"
   },
   "devDependencies": {
+    "@finance-calculator/typescript-configs": "workspace:*",
+    "@types/lodash": "^4.17.20",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^8.15.0",

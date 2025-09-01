@@ -18,6 +18,7 @@
     "helmet": "^7.1.0"
   },
   "devDependencies": {
+    "@finance-calculator/typescript-configs": "workspace:*",
     "@types/express": "^4.17.21",
     "@types/cors": "^2.8.17",
     "@types/node": "^20.11.0",

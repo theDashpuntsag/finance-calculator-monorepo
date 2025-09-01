@@ -1,8 +1,22 @@
 {
   "name": "@finance-calculator/typescript-configs",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Shared TypeScript configurations for the finance calculator monorepo",
   "private": true,
+  "files": [
+    "react.json",
+    "express.json"
+  ],
+  "exports": {
+    "./react": "./react.json",
+    "./express": "./express.json",
+    "./frontend": "./react.json",
+    "./backend": "./express.json"
+  },
   "devDependencies": {
-    "typescript": "^4.5.0"
+    "typescript": "^5.3.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.7.0"
   }
 }

@@ -33,6 +33,9 @@ importers:
         specifier: ^7.1.0
         version: 7.2.0
     devDependencies:
+      '@finance-calculator/typescript-configs':
+        specifier: workspace:*
+        version: link:../../packages/typescript-configs
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.19
@@ -73,6 +76,9 @@ importers:
         specifier: ^7.1.0
         version: 7.2.0
     devDependencies:
+      '@finance-calculator/typescript-configs':
+        specifier: workspace:*
+        version: link:../../packages/typescript-configs
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.19
@@ -110,6 +116,9 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@finance-calculator/typescript-configs':
+        specifier: workspace:*
+        version: link:../../packages/typescript-configs
       '@types/react':
         specifier: ^18.2.66
         version: 18.3.24
@@ -156,6 +165,12 @@ importers:
         specifier: ^2.12.7
         version: 2.15.4(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
+      '@finance-calculator/typescript-configs':
+        specifier: workspace:*
+        version: link:../../packages/typescript-configs
+      '@types/lodash':
+        specifier: ^4.17.20
+        version: 4.17.20
       '@types/react':
         specifier: ^18.2.66
         version: 18.3.24
@@ -193,8 +208,8 @@ importers:
   packages/typescript-configs:
     devDependencies:
       typescript:
-        specifier: ^4.5.0
-        version: 4.9.5
+        specifier: ^5.3.0
+        version: 5.9.2
 
   packages/ui:
     devDependencies:
@@ -1312,6 +1327,10 @@ packages:
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+    dev: true
+
+  /@types/lodash@4.17.20:
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
     dev: true
 
   /@types/mime@1.3.5:
@@ -3655,12 +3674,6 @@ packages:
       media-typer: 0.3.0
       mime-types: 2.1.35
     dev: false
-
-  /typescript@4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-    dev: true
 
   /typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
