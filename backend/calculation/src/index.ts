@@ -3,7 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 8081;
 
 // Middleware
 app.use(helmet());
