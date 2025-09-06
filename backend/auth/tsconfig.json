@@ -3,17 +3,10 @@
   "compilerOptions": {
     "rootDir": "./src",
     "baseUrl": ".",
-    "outDir": "./dist",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/controllers/*": ["./src/controllers/*"],
-      "@/services/*": ["./src/services/*"],
-      "@/models/*": ["./src/models/*"],
-      "@/middleware/*": ["./src/middleware/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/types/*": ["./src/types/*"],
-      "@/config/*": ["./src/config/*"]
+      "@/*": ["./src/*"]
     },
+    "outDir": "./dist",
     "types": ["node"],
     "typeRoots": ["node_modules/@types"]
   },

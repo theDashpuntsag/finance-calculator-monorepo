@@ -1,51 +1,62 @@
 import express from 'express';
-import cors from 'cors';
+import http from 'http';
 import helmet from 'helmet';
+import logger from './utils/winston.js';
+import routes from './routes/index.js';
 
-const app = express();
-const PORT = process.env.PORT || 8080;
+const APPLICATION_PORT = Number(process.env.APPLICATION_PORT) || 8123;
 
-// Middleware
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+/**
+ * Initialize Express Application
+ *
+ * @param appName - Name of the application
+ */
+async function initializeExpressApp(appName: string): Promise<void> {
+  logger.info(`| Initializing application ${appName}...`);
+  const expressApp = express();
+  expressApp.use(helmet());
+  expressApp.use(express.static('./public'));
+  expressApp.use(express.json());
 
-// Routes
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Finance Calculator API',
-    version: '1.0.0',
-    status: 'healthy',
+  // Register application routes
+  expressApp.use('/api', routes);
+
+  const server = http.createServer(expressApp);
+  server.listen(Number(APPLICATION_PORT), () => {
+    logger.info('|---------------------------------------------------------------------------|');
+    logger.info(`   Application ${appName} is running! Access url:`);
+    logger.info(`   Local:               http://localhost:${APPLICATION_PORT}`);
+    logger.info(`   External:            http://localhost:${APPLICATION_PORT}`);
+    logger.info('   Environments(env):   ' + process.env.NODE_ENV);
+    logger.info('|---------------------------------------------------------------------------|');
+    logger.info('Application started successful!');
   });
-});
+}
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
-});
+/**
+ *  Initialize Database Connection
+ *
+ * @param appName - Name of the application
+ */
+async function initializeDatabaseConnection(appName: string): Promise<void> {
+  logger.info(`| Initializing database connection for ${appName}...`);
+}
 
-// Sample finance calculation endpoint
-app.post('/api/calculate/compound-interest', (req, res) => {
-  const { principal, rate, time, compounding } = req.body;
+async function setupScheduledTasks(appName: string): Promise<void> {
+  logger.info(`| Setting up scheduled tasks for ${appName}...`);
+}
 
-  if (!principal || !rate || !time || !compounding) {
-    return res.status(400).json({
-      error: 'Missing required fields: principal, rate, time, compounding',
-    });
+async function main() {
+  try {
+    logger.info('|======================== APPLICATION is STARTING ===========================|');
+    const appName = 'Finance-Calculator';
+    await initializeExpressApp(appName);
+    await initializeDatabaseConnection(appName);
+    await setupScheduledTasks(appName);
+    logger.info('|==================== APPLICATION started SUCCESSFULLY ======================|');
+  } catch (error: unknown) {
+    logger.error(`Failed to start the application: ${(error as Error).message}`);
   }
+}
 
-  const amount = principal * Math.pow(1 + rate / compounding, compounding * time);
-  const interest = amount - principal;
-
-  res.json({
-    principal,
-    rate,
-    time,
-    compounding,
-    finalAmount: Math.round(amount * 100) / 100,
-    interestEarned: Math.round(interest * 100) / 100,
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+main();
