@@ -1,8 +1,8 @@
 import express from 'express';
 import http from 'http';
 import helmet from 'helmet';
-import logger from './utils/winston.js';
-import routes from './routes/index.js';
+import logger from './utils/winston';
+import routes from './routes/index';
 
 const APPLICATION_PORT = Number(process.env.APPLICATION_PORT) || 8123;
 
