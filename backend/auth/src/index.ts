@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import logger from './utils/winston';
 import routes from './routes/index';
 
-const APPLICATION_PORT = Number(process.env.APPLICATION_PORT) || 8123;
+const APPLICATION_PORT = Number(process.env.APPLICATION_PORT) | 8123;
 
 /**
  * Initialize Express Application
@@ -12,7 +12,7 @@ const APPLICATION_PORT = Number(process.env.APPLICATION_PORT) || 8123;
  * @param appName - Name of the application
  */
 async function initializeExpressApp(appName: string): Promise<void> {
-  logger.info(`| Initializing application ${appName}...`);
+  logger.info(`Initializing application ${appName}...`);
   const expressApp = express();
   expressApp.use(helmet());
   expressApp.use(express.static('./public'));
@@ -23,13 +23,12 @@ async function initializeExpressApp(appName: string): Promise<void> {
 
   const server = http.createServer(expressApp);
   server.listen(Number(APPLICATION_PORT), () => {
-    logger.info('|---------------------------------------------------------------------------|');
+    logger.info('-------------------------------------------------------------------------------');
     logger.info(`   Application ${appName} is running! Access url:`);
     logger.info(`   Local:               http://localhost:${APPLICATION_PORT}`);
     logger.info(`   External:            http://localhost:${APPLICATION_PORT}`);
     logger.info('   Environments(env):   ' + process.env.NODE_ENV);
-    logger.info('|---------------------------------------------------------------------------|');
-    logger.info('Application started successful!');
+    logger.info('-------------------------------------------------------------------------------');
   });
 }
 
@@ -39,21 +38,21 @@ async function initializeExpressApp(appName: string): Promise<void> {
  * @param appName - Name of the application
  */
 async function initializeDatabaseConnection(appName: string): Promise<void> {
-  logger.info(`| Initializing database connection for ${appName}...`);
+  logger.info(`Initializing database connection for ${appName}...`);
 }
 
 async function setupScheduledTasks(appName: string): Promise<void> {
-  logger.info(`| Setting up scheduled tasks for ${appName}...`);
+  logger.info(`Setting up scheduled tasks for ${appName}...`);
 }
 
 async function main() {
   try {
-    logger.info('|======================== APPLICATION is STARTING ===========================|');
+    logger.info('======================== APPLICATION is STARTING =============================');
     const appName = 'Finance-Calculator';
     await initializeExpressApp(appName);
     await initializeDatabaseConnection(appName);
     await setupScheduledTasks(appName);
-    logger.info('|==================== APPLICATION started SUCCESSFULLY ======================|');
+    logger.info('==================== APPLICATION started SUCCESSFULLY ========================');
   } catch (error: unknown) {
     logger.error(`Failed to start the application: ${(error as Error).message}`);
   }
