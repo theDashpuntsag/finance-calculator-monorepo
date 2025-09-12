@@ -1,10 +1,11 @@
 import express from 'express';
-import http from 'http';
 import helmet from 'helmet';
-import logger from './utils/winston';
+import http from 'http';
+import 'reflect-metadata';
 import routes from './routes/index';
+import logger from './utils/winston';
 
-const APPLICATION_PORT = Number(process.env.APPLICATION_PORT) | 8123;
+const APPLICATION_PORT = Number(process.env.APPLICATION_PORT) | 8000;
 
 /**
  * Initialize Express Application
@@ -19,12 +20,12 @@ async function initializeExpressApp(appName: string): Promise<void> {
   expressApp.use(express.json());
 
   // Register application routes
-  expressApp.use('/api', routes);
+  expressApp.use(routes);
 
   const server = http.createServer(expressApp);
   server.listen(Number(APPLICATION_PORT), () => {
     logger.info('-------------------------------------------------------------------------------');
-    logger.info(`   Application ${appName} is running! Access url:`);
+    logger.info(`   Application:         ${appName}`);
     logger.info(`   Local:               http://localhost:${APPLICATION_PORT}`);
     logger.info(`   External:            http://localhost:${APPLICATION_PORT}`);
     logger.info('   Environments(env):   ' + process.env.NODE_ENV);
@@ -45,13 +46,17 @@ async function setupScheduledTasks(appName: string): Promise<void> {
   logger.info(`Setting up scheduled tasks for ${appName}...`);
 }
 
+async function initializeApplication(appName: string): Promise<void> {
+  await initializeExpressApp(appName);
+  await initializeDatabaseConnection(appName);
+  await setupScheduledTasks(appName);
+}
+
 async function main() {
   try {
     logger.info('======================== APPLICATION is STARTING =============================');
     const appName = 'Finance-Calculator';
-    await initializeExpressApp(appName);
-    await initializeDatabaseConnection(appName);
-    await setupScheduledTasks(appName);
+    await initializeApplication(appName);
     logger.info('==================== APPLICATION started SUCCESSFULLY ========================');
   } catch (error: unknown) {
     logger.error(`Failed to start the application: ${(error as Error).message}`);
