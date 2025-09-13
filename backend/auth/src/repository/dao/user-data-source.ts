@@ -5,12 +5,10 @@ export const UserDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: 5432,
-  username: 'test',
-  password: 'test',
-  database: 'test',
-  synchronize: true,
-  logging: true,
+  username: 'thedashpuntsag',
+  password: '',
+  database: '',
   entities: [User],
-  subscribers: [],
-  migrations: [],
+  subscribers: [], // Add your subscriber files here
+  migrations: [], // Add your migration files here
 });
