@@ -29,15 +29,21 @@
     ],
     "description": "Declare an async function with Promise return type",
   },
-  "AWS Lambda Handler": {
-    "prefix": "lambda",
+  "AWS Lambda Handler imports": {
+    "prefix": "lambdai",
     "body": [
       "import { ${1:serviceName}Service } from '@/services/${2:entityName}';",
       "import { createApiGatewayFunction, CustomError, extractMetadata } from '@custom-repo/global-libs';",
+    ],
+    "description": "Import necessary modules for AWS Lambda handler",
+  },
+  "AWS Lambda Handler": {
+    "prefix": "lambda",
+    "body": [
       "",
-      "export const ${3:handlerName} = createApiGatewayFunction(async (event) => {",
+      "export const ${1:handlerName} = createApiGatewayFunction(async (event) => {",
       "\t${4:// Implementation}",
-      "\treturn await ${1:serviceName}Service();",
+      "\treturn await {}",
       "});",
     ],
     "description": "Create an AWS Lambda handler with createApiGatewayFunction",
@@ -45,9 +51,6 @@
   "Lambda GET by ID": {
     "prefix": "lambdaget",
     "body": [
-      "import { ${1:serviceName}Service } from '@/services/${2:entityName}';",
-      "import { createApiGatewayFunction, CustomError } from '@custom-repo/global-libs';",
-      "",
       "export const get${3:EntityName}ById = createApiGatewayFunction(async (event) => {",
       "\tif (!event.pathParameters || !event.pathParameters.id) {",
       "\t\tthrow new CustomError('Path variable is missing');",
